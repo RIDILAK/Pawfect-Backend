@@ -8,7 +8,7 @@ namespace Pawfect_Backend.Repositories
 {
     public interface IAddressRepository
     {
-        Task<List<Address>> GetAddressesByUserId(int userId);
+        Task<List<Address>> GetAddressesByUserIdAsync(int userId);
         Task<Address> GetAddressById(int addressId);
         Task AddAddress(Address address);
         Task RemoveAddress(Address address);
@@ -23,7 +23,7 @@ namespace Pawfect_Backend.Repositories
             _context = context;
         }
 
-        public async Task<List<Address>> GetAddressesByUserId(int userId)
+        public async Task<List<Address>> GetAddressesByUserIdAsync(int userId)
         {
             return await _context.Address.Where(a => a.userId == userId).ToListAsync();
         }

@@ -32,7 +32,7 @@ namespace Pawfect_Backend.Services
                 return new Responses<string> { StatusCode = 404, Message = "Address Cannot be Null" };
             }
 
-            var userAddresses = await _addressRepository.GetAddressesByUserId(userId);
+            var userAddresses = await _addressRepository.GetAddressesByUserIdAsync(userId);
             if (userAddresses.Count >= 5)
             {
                 return new Responses<string> { StatusCode = 400, Message = "Maximum number of addresses reached" };
@@ -48,7 +48,7 @@ namespace Pawfect_Backend.Services
 
         public async Task<Responses<List<GetAddressDto>>> GetAddresses(int userId)
         {
-            var addresses = await _addressRepository.GetAddressesByUserId(userId);
+            var addresses = await _addressRepository.GetAddressesByUserIdAsync(userId);
             if (addresses.Count == 0)
             {
                 return new Responses<List<GetAddressDto>> { StatusCode = 404, Message = "Address not found" };
