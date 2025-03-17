@@ -14,6 +14,12 @@ namespace Pawfect_Backend.Repositories
         public  Task<Cart> GetCartByUserId(int userId);
         public Task<Address>GetAddressById(int Addressid,int userId);
 
+        public  Task<Order> GetOrderById(int Id);
+        public  Task UpdateOrderStatus(Order order, string status);
+
+
+
+
         public Task RemoveCart(Cart cart);
 
         public Task updateQuantity(Product product);
@@ -78,6 +84,23 @@ namespace Pawfect_Backend.Repositories
         {
             _context.Products.Update(product);
             await _context.SaveChangesAsync();
-        }                       
-    }          
+        }
+
+        public async Task<Order> GetOrderById(int Id)
+        {
+            return await _context.Orders.FirstOrDefaultAsync(x => x.OrderId == Id);
+        }
+        public async Task UpdateOrderStatus(Order order, string status)
+        {
+            if (order != null)
+            {
+                order.OrderStatus = status;
+                _context.Orders.Update(order);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+
+
+    }
 }     

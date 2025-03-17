@@ -12,6 +12,9 @@ namespace Pawfect_Backend.Services
         public Task<Responses<List<ViewUserOrderDetailsDto>>> GetAllOrders();
         public Task<Responses<TotalRevenueDto>>GetRevenue();
 
+        public Task<Responses<AddStatusDto>> ChangeStatus(int OrderId,string status);
+       
+
     }
     public class OrderServices : IOrderServices
     {
@@ -45,6 +48,7 @@ namespace Pawfect_Backend.Services
                     OrderTime = DateTime.Now,
                     AddressId = createOrderDto.AddressId,
                     TotalPrice = createOrderDto.TotalAmount,
+                    OrderStatus="Pending",
                     TransactionId = createOrderDto.TransactionId,
                     OrderItems = cart.CartItems.Select(c => new OrderItem
                     {
@@ -89,6 +93,7 @@ namespace Pawfect_Backend.Services
                 OrderId = o.OrderId,
                 TotalPrice = o.OrderItems.Sum(oi => oi.TotalPrice),
                 OrderDate = o.OrderTime,
+                OrderStatus= o.OrderStatus,
                 TransactionId = o.TransactionId,
                 Address = _mapper.Map<AddressCreateDto>(o.Address),
                 OrderProduct = _mapper.Map<List<OrderViewDto>>(o.OrderItems.ToList()),
@@ -126,6 +131,38 @@ namespace Pawfect_Backend.Services
 
             return new Responses<TotalRevenueDto> { StatusCode = 200, Message = "Revenue Retrived Succesfully", Data = new TotalRevenueDto {TotalRevenue=amount,TotalItemsSold=Items } };
         }
+
+        public async Task<Responses<AddStatusDto>> ChangeStatus(int OrderId, string status)
+        {
+            string[] CheckStatus = { "Pending", "Processing", "Shipped", "Delivered", "Cancelled", "Returned" };
+            if (CheckStatus.Contains(status)){ 
+            var order = await _orderRepository.GetOrderById(OrderId);
+
+            if (order == null)
+            {
+                return new Responses<AddStatusDto> { StatusCode = 400, Message = "Order not found" };
+            }
+
+            await _orderRepository.UpdateOrderStatus(order, status);
+
+                return new Responses<AddStatusDto>
+                {
+                    StatusCode = 200,
+                    Message = "Order status updated successfully",
+                    Data = new AddStatusDto { OrderStatus = order.OrderStatus }
+                };
+            }
+            else
+            {
+                return new Responses<AddStatusDto>
+                {
+                    StatusCode = 404,
+                    Message = "Invalid Status"
+                };
+            }
+
+        }
+
 
     }
 }

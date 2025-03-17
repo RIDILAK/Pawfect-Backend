@@ -12,37 +12,38 @@ namespace Pawfect_Backend.Repositories
         Task<Address> GetAddressById(int addressId);
         Task AddAddress(Address address);
         Task RemoveAddress(Address address);
-    }
 
-    public class AddressRepository : IAddressRepository
-    {
-        private readonly ApplicationDbContext _context;
 
-        public AddressRepository(ApplicationDbContext context)
+        public class AddressRepository : IAddressRepository
         {
-            _context = context;
-        }
+            private readonly ApplicationDbContext _context;
 
-        public async Task<List<Address>> GetAddressesByUserIdAsync(int userId)
-        {
-            return await _context.Address.Where(a => a.userId == userId).ToListAsync();
-        }
+            public AddressRepository(ApplicationDbContext context)
+            {
+                _context = context;
+            }
 
-        public async Task<Address> GetAddressById(int addressId)
-        {
-            return await _context.Address.FirstOrDefaultAsync(a => a.AddressId == addressId);
-        }
+            public async Task<List<Address>> GetAddressesByUserIdAsync(int userId)
+            {
+                return await _context.Address.Where(a => a.userId == userId).ToListAsync();
+            }
 
-        public async Task AddAddress(Address address)
-        {
-            await _context.Address.AddAsync(address);
-            await _context.SaveChangesAsync();
-        }
+            public async Task<Address> GetAddressById(int addressId)
+            {
+                return await _context.Address.FirstOrDefaultAsync(a => a.AddressId == addressId);
+            }
 
-        public async Task RemoveAddress(Address address)
-        {
-            _context.Address.Remove(address);
-            await _context.SaveChangesAsync();
+            public async Task AddAddress(Address address)
+            {
+                await _context.Address.AddAsync(address);
+                await _context.SaveChangesAsync();
+            }
+
+            public async Task RemoveAddress(Address address)
+            {
+                _context.Address.Remove(address);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

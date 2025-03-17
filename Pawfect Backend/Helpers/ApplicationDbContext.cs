@@ -68,6 +68,13 @@ namespace Pawfect_Backend.Context
                 .HasForeignKey(o => o.AddressId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<Order>()
+                .HasIndex(o => o.TransactionId)
+                .IsUnique();
+
+            modelBuilder.Entity<Order>()
+                .Property(o => o.OrderStatus)
+                .HasDefaultValue("Pending");
 
 
 

@@ -63,6 +63,15 @@ namespace Pawfect_Backend.Controllers
             return StatusCode(response.StatusCode, response);
         }
 
+        [HttpPatch("Update_status")]
+        [Authorize(Roles ="Admin")]
+
+        public async Task <IActionResult> ChangeOrderStatus(int OrderId, AddStatusDto addStatusDto)
+        {
+            var response = await _services.ChangeStatus(OrderId, addStatusDto.OrderStatus);
+            return StatusCode(response.StatusCode, response);
+        }
+
 
     }
 }

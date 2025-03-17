@@ -1,10 +1,14 @@
-﻿namespace Pawfect_Backend.Dto
+﻿using Pawfect_Backend.Models;
+
+namespace Pawfect_Backend.Dto
 {
     public class CreateOrderDto
     {
         public int AddressId { get; set; }
         public int TotalAmount {  get; set; }
         public string TransactionId {  get; set; }
-         
+
+     
+
     }
 }
