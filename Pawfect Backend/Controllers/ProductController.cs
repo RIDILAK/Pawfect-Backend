@@ -17,7 +17,7 @@ namespace Pawfect_Backend.Controllers
         }
 
         [HttpGet("GetALlProducts")]
-        [Authorize]
+      
         public async Task <IActionResult> GetAllProducts()
         {
             var isGet =await _services.GetProducts();

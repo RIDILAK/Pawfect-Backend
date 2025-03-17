@@ -12,6 +12,7 @@ namespace Pawfect_Backend.Services
         Task<Responses<List<GetAllUsersDto>>> GetallUsers();
         Task<Responses<GetAllUsersDto>> GetById(int id);
         Task<Responses<string>> AddCategory(AddCategoryDto AddCategory);
+        Task<Responses<List<GetCategoryDto>>> GetCategories();
         Task<Responses<string>> AddProduct(AddProductDto AddProduct);
         Task<Responses<string>> UpdateProduct(int Id, AddProductDto UpdateProduct);
         Task<Responses<string>> DeleteProduct(int Id);
@@ -44,6 +45,12 @@ namespace Pawfect_Backend.Services
                 return new Responses<GetAllUsersDto> { StatusCode = 404, Message = "User Not Found" };
             }
             return new Responses<GetAllUsersDto> { Data = _mapper.Map<GetAllUsersDto>(user), StatusCode = 200 };
+        }
+     public async Task<Responses<List<GetCategoryDto>>> GetCategories()
+        {
+            var category = await _adminRepository.GetAllCategory();
+            var mapperCategory = _mapper.Map<List<GetCategoryDto>>(category);
+            return new Responses<List<GetCategoryDto>> { Data = mapperCategory, StatusCode = 200,Message="Category Retrived Succesfully" };
         }
 
         public async Task<Responses<string>> AddCategory(AddCategoryDto AddCategory)

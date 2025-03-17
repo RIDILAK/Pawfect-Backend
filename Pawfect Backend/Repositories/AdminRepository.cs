@@ -11,6 +11,8 @@ namespace Pawfect_Backend.Repositories
         Task<List<User>> GetAllUsers();
         Task<User> GetUserById(int id);
         Task AddCategory(Category category);
+
+        Task<List<Category>> GetAllCategory();
         Task AddProduct(Product product);
         Task<Product> GetProductById(int id);
         Task UpdateProduct(Product product);
@@ -41,6 +43,10 @@ namespace Pawfect_Backend.Repositories
         {
             await _context.categories.AddAsync(category);
             await _context.SaveChangesAsync();
+        }
+       public async Task<List<Category>> GetAllCategory()
+        {
+            return await _context.categories.ToListAsync();
         }
 
         public async Task AddProduct(Product product)

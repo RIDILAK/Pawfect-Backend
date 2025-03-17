@@ -9,6 +9,7 @@ using Pawfect_Backend.Context;
 using Pawfect_Backend.Helpers;
 using Pawfect_Backend.Services;
 using Pawfect_Backend.Repositories;
+using static Pawfect_Backend.Repositories.IAddressRepository;
 
 namespace Pawfect_Backend
 {
@@ -49,7 +50,21 @@ namespace Pawfect_Backend
                         new string[] {}
                     }
                 });
+
             });
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    policy =>
+                    {
+                        policy.AllowAnyOrigin()
+                              .AllowAnyHeader()
+                              .AllowAnyMethod();
+                    });
+            });
+
+
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IUserServices, UsersServices>();
             builder.Services.AddScoped<IProductServices, ProductServices>();
@@ -99,7 +114,7 @@ namespace Pawfect_Backend
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors("AllowAll");
 
             app.UseAuthentication();
             app.UseAuthorization();

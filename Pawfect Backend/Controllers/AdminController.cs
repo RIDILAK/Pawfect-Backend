@@ -35,6 +35,15 @@ namespace Pawfect_Backend.Controllers
             return StatusCode(result.StatusCode,result);
         }
 
+        [HttpGet("GetAllCategory")]
+        [Authorize(Roles ="Admin")]
+
+        public async Task <IActionResult> GetCategory()
+        {
+            var result = await _adminServices.GetCategories();
+            return StatusCode(result.StatusCode, result);
+        }
+
         [HttpPost("AddCategory")]
         [Authorize(Roles = "Admin")]
 

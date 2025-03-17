@@ -12,6 +12,7 @@ namespace Pawfect_Backend.Helpers
             CreateMap<GetProductsDto, Product>().ReverseMap()
             .ForMember(e => e.CategoryName, e => e.MapFrom(e => e.category.CategoryName));
             CreateMap<User, GetAllUsersDto>().ReverseMap();
+            CreateMap<Category,GetCategoryDto>().ReverseMap();
             CreateMap<Category, AddCategoryDto>().ReverseMap();
             CreateMap<Product, AddProductDto>().ReverseMap();
             CreateMap<WishList, getWishListDto>().ReverseMap();

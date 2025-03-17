@@ -73,7 +73,7 @@ namespace Pawfect_Backend.Services
                 return new Responses<string> { StatusCode = 401, Message = "Invalid password" };
             }
 
-            return new Responses<string> { Data = GenerateToken(user), StatusCode = 200 };
+            return new Responses<string> { Data = GenerateToken(user), StatusCode = 200,Message=user.Role };
         }
 
         public string GenerateToken(User user)
