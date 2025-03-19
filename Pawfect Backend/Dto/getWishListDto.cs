@@ -1,8 +1,12 @@
-﻿namespace Pawfect_Backend.Dto
+﻿using Pawfect_Backend.Models;
+
+namespace Pawfect_Backend.Dto
 {
     public class getWishListDto
     {
         public int WishListId { get; set; }
+
+        public int ProductId { get; set; }
         public string ProductName { get; set; }
 
         public string Url { get; set; }
@@ -11,6 +15,8 @@
         public int Rating { get; set; }
 
         public string Description { get; set; }
+
+       
 
     }
 }

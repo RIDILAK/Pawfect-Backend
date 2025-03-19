@@ -34,7 +34,7 @@ namespace Pawfect_Backend.Controllers
         }
 
         [HttpGet("GetByCategory")]
-        [Authorize]
+        
 
         public async Task <IActionResult> GetByCategory(string category)
         {

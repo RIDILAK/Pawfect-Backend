@@ -73,6 +73,7 @@ namespace Pawfect_Backend.Services
                     var wishListDtos = wishListItems.Select(x => new getWishListDto
                     {
                         WishListId = x.WishListId,
+                        ProductId=x.ProductId,
                         ProductName = x.Product.ProductName,
                         Url = x.Product.Url,
                         Price = x.Product.Price,
