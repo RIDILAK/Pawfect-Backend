@@ -25,7 +25,7 @@ namespace Pawfect_Backend.Controllers
         
         }
        
-        [HttpPost("loginUser")]
+        [HttpPost("login")]
 
         public async Task <IActionResult> LoginUser(LoginDto login)
         {

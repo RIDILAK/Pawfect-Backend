@@ -17,7 +17,7 @@ namespace Pawfect_Backend.Controllers
             _addressServices = addressServices;
         }
 
-        [HttpPost("Add-Address")]
+        [HttpPost("Add")]
         [Authorize (Roles =("User"))]
 
         public async Task<IActionResult> AddAddress(AddressCreateDto newAddress)

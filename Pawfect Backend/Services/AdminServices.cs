@@ -13,8 +13,8 @@ namespace Pawfect_Backend.Services
         Task<Responses<GetAllUsersDto>> GetById(int id);
         Task<Responses<string>> AddCategory(AddCategoryDto AddCategory);
         Task<Responses<List<GetCategoryDto>>> GetCategories();
-        Task<Responses<string>> AddProduct(AddProductDto AddProduct);
-        Task<Responses<string>> UpdateProduct(int Id, AddProductDto UpdateProduct);
+        Task<Responses<string>> AddProduct(AddProductDto AddProduct,IFormFile imageFile);
+        Task<Responses<string>> UpdateProduct(int Id, AddProductDto UpdateProduct, IFormFile imageFile);
         Task<Responses<string>> DeleteProduct(int Id);
         Task<Responses<string>> BlockUser(int Id);
     }
@@ -23,11 +23,13 @@ namespace Pawfect_Backend.Services
     {
         private readonly IAdminRepository _adminRepository;
         private readonly IMapper _mapper;
+        private readonly ICLoudinaryServices _cloudinaryServices;
 
-        public AdminServices(IAdminRepository adminRepository, IMapper mapper)
+        public AdminServices(IAdminRepository adminRepository, IMapper mapper, ICLoudinaryServices cloudinaryServices)
         {
             _adminRepository = adminRepository;
             _mapper = mapper;
+            _cloudinaryServices = cloudinaryServices;
         }
 
         public async Task<Responses<List<GetAllUsersDto>>> GetallUsers()
@@ -60,20 +62,27 @@ namespace Pawfect_Backend.Services
             return new Responses<string> { Message = "Category Added Successfully", StatusCode = 200 };
         }
 
-        public async Task<Responses<string>> AddProduct(AddProductDto AddProduct)
+        public async Task<Responses<string>> AddProduct(AddProductDto AddProduct, IFormFile imageFile)
         {
             var product = _mapper.Map<Product>(AddProduct);
+            product.Url = await _cloudinaryServices.UploadImage(imageFile);
             await _adminRepository.AddProduct(product);
             return new Responses<string> { Message = "Product Added Successfully", StatusCode = 200 };
         }
 
-        public async Task<Responses<string>> UpdateProduct(int Id, AddProductDto UpdateProduct)
+        public async Task<Responses<string>> UpdateProduct(int Id, AddProductDto UpdateProduct,IFormFile imageFile)
         {
             var product = await _adminRepository.GetProductById(Id);
+
             if (product == null)
             {
                 return new Responses<string> { StatusCode = 404, Message = "Product Not Found" };
             }
+            if (imageFile != null && imageFile.Length > 0) {
+
+                product.Url = await _cloudinaryServices.UploadImage(imageFile);
+
+            } 
 
             _mapper.Map(UpdateProduct, product);
             await _adminRepository.UpdateProduct(product);

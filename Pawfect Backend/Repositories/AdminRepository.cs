@@ -48,7 +48,7 @@ namespace Pawfect_Backend.Repositories
         {
             return await _context.categories.ToListAsync();
         }
-
+         
         public async Task AddProduct(Product product)
         {
             await _context.Products.AddAsync(product);

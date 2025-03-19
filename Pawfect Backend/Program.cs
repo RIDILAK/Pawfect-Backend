@@ -73,6 +73,7 @@ namespace Pawfect_Backend
             builder.Services.AddScoped<ICartServices, CartServices>();
             builder.Services.AddScoped<IAddressService, AddressService>();
             builder.Services.AddScoped<IOrderServices, OrderServices>();
+            builder.Services.AddScoped<ICLoudinaryServices,CloudinaryServices>();
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 

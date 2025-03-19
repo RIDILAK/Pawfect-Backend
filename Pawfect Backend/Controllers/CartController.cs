@@ -14,7 +14,7 @@ namespace Pawfect_Backend.Controllers
         public CartController(ICartServices services) { 
             _services = services;
         }
-        [HttpGet("GetAllCarts")]
+        [HttpGet("GetAll")]
         [Authorize(Roles ="User")]
         public async Task <IActionResult> GetAllCarts()
         {
@@ -26,7 +26,7 @@ namespace Pawfect_Backend.Controllers
 
 
 
-        [HttpPost("Add-To-Cart")]
+        [HttpPost("Add")]
         [Authorize(Roles ="User")]
         public async Task <IActionResult> AddToCart(int productId)
         {
@@ -35,7 +35,7 @@ namespace Pawfect_Backend.Controllers
             return StatusCode(response.StatusCode, response);
         }
 
-        [HttpDelete("RemoveFromCart")]
+        [HttpDelete("Remove")]
         [Authorize(Roles ="User")]
 
         public async Task <IActionResult> RemoveCart(int productId)

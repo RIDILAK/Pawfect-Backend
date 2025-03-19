@@ -16,15 +16,15 @@ namespace Pawfect_Backend.Controllers
             _services = services;
         }
 
-        [HttpGet("GetALlProducts")]
+        [HttpGet("GetALl")]
       
-        public async Task <IActionResult> GetAllProducts()
+        public async Task <IActionResult> GetAll()
         {
             var isGet =await _services.GetProducts();
             return StatusCode(isGet.StatusCode, isGet);
         }
 
-        [HttpGet("GetProductById")]
+        [HttpGet("GetById")]
         [Authorize]
 
         public async Task <IActionResult> GetById(int id)
@@ -33,7 +33,7 @@ namespace Pawfect_Backend.Controllers
             return StatusCode(isGetById.StatusCode, isGetById);
         }
 
-        [HttpGet("GetProductByCategory")]
+        [HttpGet("GetByCategory")]
         [Authorize]
 
         public async Task <IActionResult> GetByCategory(string category)
@@ -51,9 +51,9 @@ namespace Pawfect_Backend.Controllers
             return StatusCode(isPaginatedProduct.StatusCode, isPaginatedProduct);
         }
 
-        [HttpGet("SearchProduct")]
+        [HttpGet("Search")]
         [Authorize]
-        public async Task<IActionResult> SearchProduct(string search)
+        public async Task<IActionResult> Search(string search)
         {
                 var result = await _services.SearchProducts(search);
                 if (result == null || result.Count == 0)

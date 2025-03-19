@@ -16,7 +16,7 @@ namespace Pawfect_Backend.Controllers
         {
             _wishListServices = wishListServices;
         }
-        [HttpPost("Add-or-Remove from wishlist")]
+        [HttpPost("Add-or-Remove")]
         [Authorize(Roles ="User")]
 
         public async Task <IActionResult> AddOrRemoveWishList(int ProductId) 

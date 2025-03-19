@@ -8,7 +8,7 @@ using Pawfect_Backend.Services;
 namespace Pawfect_Backend.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController]  
     public class OrderController : ControllerBase
     {
         private readonly IOrderServices _services;
@@ -16,7 +16,7 @@ namespace Pawfect_Backend.Controllers
          
             _services = services;
         }
-        [HttpPost("Place-Order")]
+        [HttpPost("Place")]
         [Authorize]
 
         public async Task <IActionResult> Create(CreateOrderDto createOrderDto)
@@ -44,7 +44,7 @@ namespace Pawfect_Backend.Controllers
             var order=await _services.GetOrderDetails(userId);
             return StatusCode(order.StatusCode, order);
         }
-        [HttpGet("All-Orders")]
+        [HttpGet("Get-All")]
         [Authorize(Roles ="Admin")]
 
         public async Task<IActionResult> GetAll()
@@ -63,7 +63,7 @@ namespace Pawfect_Backend.Controllers
             return StatusCode(response.StatusCode, response);
         }
 
-        [HttpPatch("Update_status")]
+        [HttpPatch("Update-status")]
         [Authorize(Roles ="Admin")]
 
         public async Task <IActionResult> ChangeOrderStatus(int OrderId, AddStatusDto addStatusDto)

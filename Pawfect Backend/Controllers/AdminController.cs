@@ -57,18 +57,18 @@ namespace Pawfect_Backend.Controllers
         [HttpPost("AddProduct")]
         [Authorize(Roles = "Admin")]
 
-        public async Task <IActionResult> AddProduct(AddProductDto Product)
+        public async Task <IActionResult> AddProduct([FromForm]AddProductDto Product,IFormFile imageFile)
         {
-            var isProductAdded = await _adminServices.AddProduct(Product);
+            var isProductAdded = await _adminServices.AddProduct(Product, imageFile);
             return StatusCode(isProductAdded.StatusCode,isProductAdded);
         }
 
         [HttpPut("UpdateProduct")]
         [Authorize(Roles = "Admin")]
 
-        public async Task <IActionResult> UpdateEmployee(int Id, AddProductDto UpdateProduct)
+        public async Task <IActionResult> UpdateEmployee(int Id, [FromForm] AddProductDto UpdateProduct, IFormFile imageFile)
         {
-                var isProductUpdated=await _adminServices.UpdateProduct(Id, UpdateProduct);
+                var isProductUpdated=await _adminServices.UpdateProduct(Id, UpdateProduct,imageFile);
             return StatusCode(isProductUpdated.StatusCode,isProductUpdated);
         }
 

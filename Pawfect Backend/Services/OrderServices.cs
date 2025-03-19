@@ -11,7 +11,6 @@ namespace Pawfect_Backend.Services
        public Task <Responses<List<ViewUserOrderDetailsDto>>> GetOrderDetails(int userId);
         public Task<Responses<List<ViewUserOrderDetailsDto>>> GetAllOrders();
         public Task<Responses<TotalRevenueDto>>GetRevenue();
-
         public Task<Responses<AddStatusDto>> ChangeStatus(int OrderId,string status);
        
 

@@ -8,10 +8,6 @@ namespace Pawfect_Backend.Dto
         [StringLength(100, ErrorMessage = "Product Name cannot exceed 100 characters")]
         public string ProductName { get; set; }
 
-        [Required(ErrorMessage = "Image URL is required")]
-        [Url(ErrorMessage = "Invalid URL format")]
-        public string Url { get; set; }
-
         [Required(ErrorMessage = "Price is required")]
         [Range(1, int.MaxValue, ErrorMessage = "Price must be greater than 0")]
         public int Price { get; set; }
