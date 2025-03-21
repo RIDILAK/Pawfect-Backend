@@ -27,7 +27,7 @@ namespace Pawfect_Backend.Controllers
             return StatusCode(responses.StatusCode, responses);
         }
 
-        [HttpGet]
+        [HttpGet("Get-All")]
         [Authorize]
 
         public async Task <IActionResult> Get()
@@ -37,7 +37,7 @@ namespace Pawfect_Backend.Controllers
             return StatusCode(responses.StatusCode, responses);
         }
 
-        [HttpDelete]
+        [HttpDelete("Remove")]
         [Authorize(Roles ="User")]
           
         public async Task <IActionResult> Remove(int AddressId)

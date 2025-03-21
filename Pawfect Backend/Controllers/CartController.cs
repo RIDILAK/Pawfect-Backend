@@ -47,7 +47,7 @@ namespace Pawfect_Backend.Controllers
         }
 
         [HttpPut("Increase-Quantity")]
-        [Authorize]
+        [Authorize(Roles = "User")]
 
         public async Task<IActionResult> IncreaseQuantity(int productId)
         {
@@ -57,7 +57,7 @@ namespace Pawfect_Backend.Controllers
         }
 
         [HttpPut("Decrease-Quantity")]
-        [Authorize]
+        [Authorize(Roles ="User")]
 
         public async Task<IActionResult>DecreaseQuantity(int productId)
         {
