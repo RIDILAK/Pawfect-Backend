@@ -9,7 +9,7 @@ namespace Pawfect_Backend.Context
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Products> Products { get; set; }
 
         public DbSet<Category> categories { get; set; }
 
@@ -21,7 +21,7 @@ namespace Pawfect_Backend.Context
 
         public DbSet<Address> Address { get; set; }
 
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<Orders> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
 
 
@@ -29,7 +29,7 @@ namespace Pawfect_Backend.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Product>()
+            modelBuilder.Entity<Products>()
                 .HasOne(p => p.category)
                 .WithMany(c => c.Product)
                 .HasForeignKey(p => p.CategoryId);
@@ -56,23 +56,23 @@ namespace Pawfect_Backend.Context
                 .OnDelete(DeleteBehavior.NoAction);
 
 
-            modelBuilder.Entity<Order>()
+            modelBuilder.Entity<Orders>()
      .HasOne(o => o.User)
      .WithMany(u => u.Orders)
      .HasForeignKey(o => o.userId)
      .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Order>() 
+            modelBuilder.Entity<Orders>() 
                 .HasOne(o => o.Address)
                 .WithMany(a => a.Orders)
                 .HasForeignKey(o => o.AddressId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Order>()
+            modelBuilder.Entity<Orders>()
                 .HasIndex(o => o.TransactionId)
                 .IsUnique();
 
-            modelBuilder.Entity<Order>()
+            modelBuilder.Entity<Orders>()
                 .Property(o => o.OrderStatus)
                 .HasDefaultValue("Pending");
 

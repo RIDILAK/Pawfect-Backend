@@ -13,6 +13,6 @@ namespace Pawfect_Backend.Models
         [Required]
 
         public int  ProductId {get;set;}
-        public Product Product { get; set; }
+        public Products Product { get; set; }
     }
 }

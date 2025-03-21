@@ -13,10 +13,10 @@ namespace Pawfect_Backend.Repositories
         Task AddCategory(Category category);
 
         Task<List<Category>> GetAllCategory();
-        Task AddProduct(Product product);
-        Task<Product> GetProductById(int id);
-        Task UpdateProduct(Product product);
-        Task DeleteProduct(Product product);
+        Task AddProduct(Products product);
+        Task<Products> GetProductById(int id);
+        Task UpdateProduct(Products product);
+        Task DeleteProduct(Products product);
         Task BlockUser(User user);
     }
 
@@ -49,24 +49,24 @@ namespace Pawfect_Backend.Repositories
             return await _context.categories.ToListAsync();
         }
          
-        public async Task AddProduct(Product product)
+        public async Task AddProduct(Products product)
         {
             await _context.Products.AddAsync(product);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Product> GetProductById(int id)
+        public async Task<Products> GetProductById(int id)
         {
             return await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task UpdateProduct(Product product)
+        public async Task UpdateProduct(Products product)
         {
             _context.Products.Update(product);
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteProduct(Product product)
+        public async Task DeleteProduct(Products product)
         {
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();

@@ -7,6 +7,7 @@ namespace Pawfect_Backend.Services
 {
     public interface IOrderServices
     {
+       
         public Task<Responses<string>> Create(int userId, CreateOrderDto createOrderDto);
        public Task <Responses<List<ViewUserOrderDetailsDto>>> GetOrderDetails(int userId);
         public Task<Responses<List<ViewUserOrderDetailsDto>>> GetAllOrders();
@@ -41,7 +42,7 @@ namespace Pawfect_Backend.Services
             {
                 return new Responses<string> { StatusCode = 404, Message = "Cart Is Empty" };
             }
-                var order = new Order
+                var order = new Orders
                 {
                     userId = userId,
                     OrderTime = DateTime.Now,

@@ -11,7 +11,7 @@ namespace Pawfect_Backend.Repositories
     {
         Task<Cart> GetCartByUserId(int userId);
         Task<User> GetUserWithCart(int userId);
-        Task<Product> GetProductById(int productId);
+        Task<Products> GetProductById(int productId);
         Task AddCart(Cart cart);
         Task AddCartItem(CartItem cartItem);
         Task RemoveCartItem(CartItem cartItem);
@@ -43,7 +43,7 @@ namespace Pawfect_Backend.Repositories
                 .FirstOrDefaultAsync(u => u.Id == userId);
         }
 
-        public async Task<Product> GetProductById(int productId)
+        public async Task<Products> GetProductById(int productId)
         {
             return await _context.Products.FirstOrDefaultAsync(p => p.Id == productId);
         }

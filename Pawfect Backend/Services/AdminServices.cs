@@ -64,7 +64,7 @@ namespace Pawfect_Backend.Services
 
         public async Task<Responses<string>> AddProduct(AddProductDto AddProduct, IFormFile imageFile)
         {
-            var product = _mapper.Map<Product>(AddProduct);
+            var product = _mapper.Map<Products>(AddProduct);
             product.Url = await _cloudinaryServices.UploadImage(imageFile);
             await _adminRepository.AddProduct(product);
             return new Responses<string> { Message = "Product Added Successfully", StatusCode = 200 };

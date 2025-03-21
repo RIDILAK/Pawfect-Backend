@@ -8,7 +8,7 @@
         public int Quantity {  get; set; }
         public int TotalPrice {  get; set; }
 
-        public Product Product { get; set; }
-        public Order Orders { get; set; }
+        public Products Product { get; set; }
+        public Orders Orders { get; set; }
     }
 }

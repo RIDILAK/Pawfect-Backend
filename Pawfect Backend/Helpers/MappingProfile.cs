@@ -9,12 +9,12 @@ namespace Pawfect_Backend.Helpers
         public MappingProfile() { 
             CreateMap<User,LoginDto>().ReverseMap();
             CreateMap<User,SignUpDto>().ReverseMap();
-            CreateMap<GetProductsDto, Product>().ReverseMap()
+            CreateMap<GetProductsDto, Products>().ReverseMap()
             .ForMember(e => e.CategoryName, e => e.MapFrom(e => e.category.CategoryName));
             CreateMap<User, GetAllUsersDto>().ReverseMap();
             CreateMap<Category,GetCategoryDto>().ReverseMap();
             CreateMap<Category, AddCategoryDto>().ReverseMap();
-            CreateMap<Product, AddProductDto>().ReverseMap();
+            CreateMap<Products, AddProductDto>().ReverseMap();
             CreateMap<WishList, getWishListDto>().ReverseMap();
             CreateMap<Cart,CartViewDto>().ReverseMap();
             CreateMap<CartItem,CartItemViewDto> ().ReverseMap();

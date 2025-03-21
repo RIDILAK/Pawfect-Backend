@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pawfect_Backend.Models
 {
-    public class Product
+    public class Products
     {
         public int Id { get; set; }
 

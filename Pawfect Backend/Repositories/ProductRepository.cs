@@ -9,11 +9,11 @@ namespace Pawfect_Backend.Repositories
 {
     public interface IProductRepository
     {
-        Task<List<Product>> GetAllProducts();
-        Task<Product> GetProductById(int id);
-        Task<List<Product>> GetProductsByCategory(string category);
-        Task<List<Product>> GetPaginatedProducts(int pageNumber, int pageSize);
-        Task<List<Product>> SearchProducts(string search);
+        Task<List<Products>> GetAllProducts();
+        Task<Products> GetProductById(int id);
+        Task<List<Products>> GetProductsByCategory(string category);
+        Task<List<Products>> GetPaginatedProducts(int pageNumber, int pageSize);
+        Task<List<Products>> SearchProducts(string search);
     }
 
     public class ProductRepository : IProductRepository
@@ -25,22 +25,22 @@ namespace Pawfect_Backend.Repositories
             _context = context;
         }
 
-        public async Task<List<Product>> GetAllProducts()
+        public async Task<List<Products>> GetAllProducts()
         {
             return await _context.Products.Include(e => e.category).ToListAsync();
         }
 
-        public async Task<Product> GetProductById(int id)
+        public async Task<Products> GetProductById(int id)
         {
             return await _context.Products.Include(e => e.category).FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<List<Product>> GetProductsByCategory(string category)
+        public async Task<List<Products>> GetProductsByCategory(string category)
         {
             return await _context.Products.Include(e => e.category).Where(x => x.category.CategoryName == category).ToListAsync();
         }
 
-        public async Task<List<Product>> GetPaginatedProducts(int pageNumber, int pageSize)
+        public async Task<List<Products>> GetPaginatedProducts(int pageNumber, int pageSize)
         {
             return await _context.Products.Include(e => e.category)
                 .Skip((pageNumber - 1) * pageSize)
@@ -48,7 +48,7 @@ namespace Pawfect_Backend.Repositories
                 .ToListAsync();
         }
 
-        public async Task<List<Product>> SearchProducts(string search)
+        public async Task<List<Products>> SearchProducts(string search)
         {
             return await _context.Products.Include(x => x.category)
 

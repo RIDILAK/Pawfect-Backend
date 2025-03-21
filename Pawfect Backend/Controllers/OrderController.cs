@@ -12,10 +12,30 @@ namespace Pawfect_Backend.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderServices _services;
-        public OrderController(IOrderServices services) { 
+        private readonly IRazorpayOrderService _orderService;
+       
+        public OrderController(IOrderServices services,IRazorpayOrderService razorpayOrderService) { 
          
             _services = services;
+            _orderService = razorpayOrderService;
         }
+        [HttpPost("Create-RazorPay")]
+        [Authorize]
+        public async Task<IActionResult> CreateRazorPayOrder([FromBody]int price)
+        {
+           var result=await _orderService.CreateRazorpayOrder(price);
+            return StatusCode(result.StatusCode,result);
+        }
+
+        [HttpPost("Verify-Payment")]
+        [Authorize]
+
+        public async Task<IActionResult>VerifyPayment(PaymentDto payment)
+        {
+            var result = await _orderService.RazorPayment(payment);
+            return StatusCode(result.StatusCode, result);
+        }
+
         [HttpPost("Place")]
         [Authorize]
 

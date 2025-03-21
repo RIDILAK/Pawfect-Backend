@@ -10,6 +10,7 @@ using Pawfect_Backend.Helpers;
 using Pawfect_Backend.Services;
 using Pawfect_Backend.Repositories;
 using static Pawfect_Backend.Repositories.IAddressRepository;
+using Pawfect_Backend.Models;
 
 namespace Pawfect_Backend
 {
@@ -74,6 +75,7 @@ namespace Pawfect_Backend
             builder.Services.AddScoped<IAddressService, AddressService>();
             builder.Services.AddScoped<IOrderServices, OrderServices>();
             builder.Services.AddScoped<ICLoudinaryServices,CloudinaryServices>();
+            builder.Services.AddScoped<IRazorpayOrderService, RazorpayOrderService>();
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
@@ -88,6 +90,7 @@ namespace Pawfect_Backend
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+            builder.Services.Configure<RazorPaySettings>(builder.Configuration.GetSection("Razorpay"));
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                .AddJwtBearer(options =>

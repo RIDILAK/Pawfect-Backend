@@ -10,6 +10,6 @@ namespace Pawfect_Backend.Models
         [MaxLength(50,ErrorMessage ="CategoryName Cannot be more than 50 characters")]
         public string CategoryName { get; set; }
 
-        public ICollection<Product> Product { get; set; }
+        public ICollection<Products> Product { get; set; }
     }
 }

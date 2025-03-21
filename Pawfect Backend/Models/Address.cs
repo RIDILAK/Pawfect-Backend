@@ -43,7 +43,7 @@ namespace Pawfect_Backend.Models
 
         public User User { get; set; }
 
-        public List<Order> Orders { get; set; } = new List<Order>();
+        public List<Orders> Orders { get; set; } = new List<Orders>();
 
     }
 }

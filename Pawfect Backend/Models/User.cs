@@ -23,7 +23,7 @@ namespace Pawfect_Backend.Models
 
         public bool isBlocked { get; set; }
 
-        public List<Order> Orders { get; set; } = new List<Order>();
+        public List<Orders> Orders { get; set; } = new List<Orders>();
 
         public List<WishList> wishList { get; set; }
 

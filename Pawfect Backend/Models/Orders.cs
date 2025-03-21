@@ -2,8 +2,9 @@
 
 namespace Pawfect_Backend.Models
 {
-    public class Order
+    public class Orders
     {
+        [Key]
         public int OrderId { get; set; }
 
         public int userId {  get; set; }
