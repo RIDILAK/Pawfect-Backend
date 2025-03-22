@@ -21,7 +21,7 @@ namespace Pawfect_Backend.Controllers
         }
         [HttpPost("Create-RazorPay")]
         [Authorize]
-        public async Task<IActionResult> CreateRazorPayOrder([FromBody]int price)
+        public async Task<IActionResult> CreateRazorPayOrder(int price)
         {
            var result=await _orderService.CreateRazorpayOrder(price);
             return StatusCode(result.StatusCode,result);
