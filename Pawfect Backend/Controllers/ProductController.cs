@@ -52,7 +52,7 @@ namespace Pawfect_Backend.Controllers
         }
 
         [HttpGet("Search")]
-        [Authorize]
+      
         public async Task<IActionResult> Search(string search)
         {
                 var result = await _services.SearchProducts(search);

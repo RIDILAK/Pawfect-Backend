@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Pawfect_Backend.Dto;
@@ -18,7 +19,7 @@ namespace Pawfect_Backend.Controllers
         }
 
         [HttpGet("GetallUsers")]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
 
         public async Task <IActionResult> GetAllUsers()
         {
@@ -33,6 +34,13 @@ namespace Pawfect_Backend.Controllers
         {
             var result =await _adminServices.GetById(id);
             return StatusCode(result.StatusCode,result);
+        }
+        [HttpGet("GetUser")]
+        public async Task<IActionResult> GetUserId()
+        {
+            var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            var result = await _adminServices.GetById(int.Parse(userId));
+            return StatusCode(result.StatusCode, result);
         }
 
         [HttpGet("GetAllCategory")]

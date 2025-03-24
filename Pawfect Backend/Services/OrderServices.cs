@@ -33,7 +33,7 @@ namespace Pawfect_Backend.Services
             if (address == null)
             {
 
-                return new Responses<string> { StatusCode = 200, Message = "Address is wrong" };
+                return new Responses<string> { StatusCode = 400, Message = "Address is wrong" };
 
             }
 
