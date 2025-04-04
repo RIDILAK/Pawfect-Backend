@@ -68,7 +68,7 @@ public class RazorpayOrderService : IRazorpayOrderService
         {
             string generatedSignature = GenerateSignature(payment.razorpay_payment_id, payment.razorpay_order_id, _razorpaySecret);
 
-            if (generatedSignature == payment.razorpay_signature)
+            if (generatedSignature == payment.razorpay_signature   )
             {
                 return new Responses<bool> { StatusCode = 200, Message = "Payment successful", Data = true };
             }
@@ -84,12 +84,12 @@ public class RazorpayOrderService : IRazorpayOrderService
     }
 
     // ✅ Generate HMAC SHA256 Signature (Fixes Verification Issue)
-    private string GenerateSignature(string paymentId, string orderId, string secret)
+    private string GenerateSignature(string paymentId, string orderId, string secret) 
     {
         string stringToSign = orderId + "|" + paymentId;
         using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(secret)))
         {
-            var hashBytes = hmac.ComputeHash(Encoding.UTF8.GetBytes(stringToSign));
+            var hashBytes =  .ComputeHash(Encoding.UTF8.GetBytes(stringToSign));
             return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
         }
     }
